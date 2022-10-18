@@ -218,7 +218,7 @@ export class TrendsController {
           //const sentimentResults = result.body.aggregations["averageSentimentScore"].buckets;
 
           await redisClient.set(
-            redisKey+"disable",
+            redisKey,
             JSON.stringify(finalResults),
             "EX",
             60 * 60 * 24 * 30 * 2240

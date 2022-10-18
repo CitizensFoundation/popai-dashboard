@@ -190,7 +190,7 @@ class TrendsController {
                         const finalResults = result.body.aggregations["2"].buckets;
                         console.log(finalResults);
                         //const sentimentResults = result.body.aggregations["averageSentimentScore"].buckets;
-                        await redisClient.set(redisKey + "disable", JSON.stringify(finalResults), "EX", 60 * 60 * 24 * 30 * 2240);
+                        await redisClient.set(redisKey, JSON.stringify(finalResults), "EX", 60 * 60 * 24 * 30 * 2240);
                         response.send(finalResults);
                         //console.log(result);
                     }
