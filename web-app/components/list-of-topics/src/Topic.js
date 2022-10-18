@@ -28,6 +28,7 @@ export class Topic extends BaseElement {
         }
         .content {
           padding: 1rem;
+          padding-bottom: 0;
         }
         .subtext {
           color: rgba(0, 0, 0, 0.54);
@@ -333,7 +334,7 @@ export class Topic extends BaseElement {
           const yearLabel = responses[i].key_as_string.split('-')[0];
           yearLabels.push(yearLabel);
           const docCount = responses[i].doc_count
-//          const docCount = this._normalizeDocCount(parseInt(yearLabel), responses[i].doc_count);
+  //        const docCount = this._normalizeDocCount(parseInt(yearLabel), responses[i].doc_count);
 
           years[responses[i].key_as_string.split('-')[0]] = docCount;
           sentiments.push(responses[i].averageSentimentScore.value);
@@ -399,7 +400,8 @@ export class Topic extends BaseElement {
             scales: {
               y: {
                 beginAtZero: true,
-                min: -1.0
+                min: -1.0,
+                max: 1.0
               },
             },
           },

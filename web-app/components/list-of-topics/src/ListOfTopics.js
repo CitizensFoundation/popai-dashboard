@@ -93,17 +93,23 @@ export class ListOfTopics extends BaseElement {
             <h2 class="mdc-typography--title contentTitle">Introduction to the popAI Dashboard</h2>
             <div class="mdc-typography--body1 subtext contentText">
               <p>
+                The present dashboard is part of the Horizon 2020 funded project PopAI. It is a
+                visual representation of the data acquired on several topics where AI can be used in
+                the work of law enforcement agencies and the justice system. Each of the major
+                topics is broken down into subtopics of potential concern or interest to citizens.
+              </p>
+
+              <p>
+                The data was sourced from the CommonCrawl archives for the period 2013-2021.This
+                research provides both quantitative and qualitative insights into how citizens
+                discuss this in the internet domain. Firstly, by comparing the volume of data for
+                each topic and/or subtopic, we can get a better understanding of how much interest
+                each one generates. Then, by reviewing the sentiment scores, one can see whether the
+                overall discussion is positive, negative or neutral."
+              </p>
+              <p>
                 The popAI Dashboard is a part of the EU funded
                 <a href="https://www.pop-ai.eu/" target="_blank">pop AI</a> project.
-              </p>
-              <p>
-                ...
-              </p>
-              <p>
-                ....
-              </p>
-              <p style="color: #F11;padding-top: 16px;">
-                <b>NOTE: THIS IS A TEST VERSION WITH RANDOM TEST DATA</b>
               </p>
             </div>
           </div>
