@@ -86,7 +86,7 @@ class TrendsController {
             });
         };
         this.getTopicTrends = async (request, response) => {
-            const redisKey = `Trends_${request.query.topic}_V9`;
+            const redisKey = `Trends_${request.query.topicName}_${request.query.subTopicName1}_${request.query.subTopicName2}_${request.query.subTopicName3}_V9`;
             redisClient.get(redisKey).then(async (results) => {
                 if (results) {
                     console.log("Sending cached trends");
