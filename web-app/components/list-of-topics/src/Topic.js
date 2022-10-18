@@ -400,8 +400,8 @@ export class Topic extends BaseElement {
             scales: {
               y: {
                 beginAtZero: true,
-                min: -1.0,
-                max: 1.0
+                min: -0.7,
+                max: 0.7
               },
             },
           },
