@@ -16,6 +16,21 @@ export const Data = [
   {
     title: 'Biometric identifiers ',
     topicName: 'Biometric identifiers',
+    subTopicName: 'All subtopics',
+    description: `...missing desription...`,
+    dataSet: {
+      data: createRandomData(DataLabels.length),
+      dataSentiment: createRandomSentimentData(DataLabels.length),
+      labels: DataLabels,
+      label: 'Biometric identifiers - All subtopics',
+      borderColor: '#3e95cd',
+      fill: false,
+    },
+    randomCount: createRandomData(DataLabels.length)[0],
+  },
+  {
+    title: 'Biometric identifiers ',
+    topicName: 'Biometric identifiers',
     subTopicName: 'Privacy',
     subTopicNames: ['Privacy', 'Privacy - negative', 'Privacy - positive'],
     description: `...missing desription...`,
@@ -110,6 +125,21 @@ export const Data = [
     randomCount: createRandomData(DataLabels.length)[0],
   },
 
+  {
+    title: 'Predictive policing',
+    topicName: 'Predictive policing',
+    subTopicName: 'All subtopics',
+    description: `...missing desription...`,
+    dataSet: {
+      data: createRandomData(DataLabels.length),
+      dataSentiment: createRandomSentimentData(DataLabels.length),
+      labels: DataLabels,
+      label: 'Predictive policing - All subtopics',
+      borderColor: '#c523cd',
+      fill: false,
+    },
+    randomCount: createRandomData(DataLabels.length)[0],
+  },
 
   {
     title: 'Predictive policing',
@@ -209,6 +239,22 @@ export const Data = [
   },
 
 
+  {
+    title: 'Police Hacking',
+    topicName: 'Police Hacking',
+    topicNameExtra: 'Police Hacking 2',
+    subTopicName: 'All subtopics',
+    description: `...missing desription...`,
+    dataSet: {
+      data: createRandomData(DataLabels.length),
+      dataSentiment: createRandomSentimentData(DataLabels.length),
+      labels: DataLabels,
+      label: 'Police Hacking - Privacy',
+      borderColor: '#55aa11',
+      fill: false,
+    },
+    randomCount: createRandomData(DataLabels.length)[0],
+  },
 
   {
     title: 'Police Hacking',
@@ -313,6 +359,21 @@ export const Data = [
   },
 
 
+  {
+    title: 'Decision making in justice management',
+    topicName: 'Decision making in justice management',
+    subTopicName: 'All subtopics',
+    description: `...missing desription...`,
+    dataSet: {
+      data: createRandomData(DataLabels.length),
+      dataSentiment: createRandomSentimentData(DataLabels.length),
+      labels: DataLabels,
+      label: 'Decision making in justice management - Privacy',
+      borderColor: '#992223',
+      fill: false,
+    },
+    randomCount: createRandomData(DataLabels.length)[0],
+  },
 
   {
     title: 'Decision making in justice management',

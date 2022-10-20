@@ -135,7 +135,9 @@ export class Topic extends BaseElement {
   render() {
     return html`
       <div class="mdc-card shadow-animation shadow-elevation-3dp">
-        <div class="mdc-card__primary-action">
+        <div class="mdc-card__primary-action"
+          style="${this.topicData.subTopicName==='All subtopics' ? `padding: 8px; border: 3px solid ${this.topicData.dataSet.borderColor}` : ''}"
+        >
           <div class="mdc-card__media mdc-card__media--16-9 my-media"></div>
           <div class="content">
             <h2 class="mdc-typography--title contentTitle">
@@ -197,8 +199,8 @@ export class Topic extends BaseElement {
         for (let i = 0; i < responses.length; i++) {
           const domainLabel = responses[i].key;
           domainLabels.push(domainLabel);
-          const docCount = responses[i].doc_count;
-          //          const docCount = this._normalizeDocCount(parseInt(yearLabel), responses[i].doc_count);
+          //const docCount = responses[i].doc_count;
+          const docCount = this._normalizeDocCount(parseInt(yearLabel), responses[i].doc_count);
           domains[responses[i].key] = docCount;
           counts.push(docCount);
         }
@@ -314,14 +316,19 @@ export class Topic extends BaseElement {
     const topicNameExtra = this.topicData.topicNameExtra || 'noextraname ';
     const subTopicNames = this.topicData.subTopicNames;
 
-    fetch(
-      `/api/trends/getTopicTrends?topicName=${topicName}&topicNameExtra=${topicNameExtra}&subTopicName1=${subTopicNames[0]}&subTopicName2=${subTopicNames[1]}&subTopicName3=${subTopicNames[2]}`,
-{
-        headers: {
-          'Content-Type': 'application/json',
-        },
+    let url;
+
+    if (this.topicData.subTopicName === 'All subtopics') {
+      url = `/api/trends/getTopicTrendsOverAll?topicName=${topicName}&topicNameExtra=${topicNameExtra}`;
+    } else {
+      url = `/api/trends/getTopicTrends?topicName=${topicName}&topicNameExtra=${topicNameExtra}&subTopicName1=${subTopicNames[0]}&subTopicName2=${subTopicNames[1]}&subTopicName3=${subTopicNames[2]}`;
+    }
+
+    fetch(url, {
+      headers: {
+        'Content-Type': 'application/json',
       },
-    )
+    })
       .then(response => response.json())
       .then(responses => {
         this.responses = responses;
@@ -333,8 +340,8 @@ export class Topic extends BaseElement {
         for (let i = 0; i < responses.length; i++) {
           const yearLabel = responses[i].key_as_string.split('-')[0];
           yearLabels.push(yearLabel);
-          const docCount = responses[i].doc_count
-  //        const docCount = this._normalizeDocCount(parseInt(yearLabel), responses[i].doc_count);
+  //        const docCount = responses[i].doc_count;
+          const docCount = this._normalizeDocCount(parseInt(yearLabel), responses[i].doc_count);
 
           years[responses[i].key_as_string.split('-')[0]] = docCount;
           sentiments.push(responses[i].averageSentimentScore.value);
@@ -401,7 +408,7 @@ export class Topic extends BaseElement {
               y: {
                 beginAtZero: true,
                 min: -0.5,
-                max: 0.5
+                max: 0.5,
               },
             },
           },

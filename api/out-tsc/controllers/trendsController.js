@@ -85,6 +85,100 @@ class TrendsController {
                 }
             });
         };
+        this.getTopicTrendsOverAll = async (request, response) => {
+            const redisKey = `Trends_OverAll${request.query.topicName}_${request.query.topicNameExtra}_V9`;
+            redisClient.get(redisKey).then(async (results) => {
+                if (results) {
+                    console.log("Sending cached trends");
+                    response.send(JSON.parse(results));
+                }
+                else {
+                    console.log(request.query);
+                    const body = {
+                        aggs: {
+                            "2": {
+                                date_histogram: {
+                                    field: "createdAt",
+                                    calendar_interval: "1y",
+                                    time_zone: "Atlantic/Reykjavik",
+                                    min_doc_count: 1,
+                                },
+                                "aggs": {
+                                    "averageSentimentScore": {
+                                        avg: {
+                                            field: "sentimentScore",
+                                        },
+                                    },
+                                }
+                            },
+                        },
+                        size: 0,
+                        stored_fields: ["*"],
+                        script_fields: {},
+                        docvalue_fields: [{ field: "createdAt", format: "date_time" }],
+                        _source: { excludes: [] },
+                        query: {
+                            bool: {
+                                must: [
+                                    { term: { relevanceScore: 1 } },
+                                    /*{ term: { oneTwoRelevanceScoreV2: 1 } },
+                                    { term: { oneTwoRelevanceScore: 1 } }*/
+                                ],
+                                filter: [
+                                    { match_all: {} },
+                                    {
+                                        "bool": {
+                                            "should": [
+                                                {
+                                                    "match_phrase": {
+                                                        "topic.keyword": request.query.topicName
+                                                    }
+                                                },
+                                                {
+                                                    "match_phrase": {
+                                                        "topic.keyword": request.query.topicNameExtra
+                                                    }
+                                                }
+                                            ],
+                                            "minimum_should_match": 1
+                                        }
+                                    },
+                                    {
+                                        range: {
+                                            createdAt: {
+                                                gte: "2006-03-01T01:57:35.660Z",
+                                                lte: "2023-03-01T01:57:35.660Z",
+                                                format: "strict_date_optional_time",
+                                            },
+                                        },
+                                    }
+                                ],
+                                should: [],
+                                must_not: [
+                                //                { "term" : { "relevanceScore" : 0 } }
+                                ],
+                            },
+                        },
+                    };
+                    try {
+                        const result = await this.esClient.search({
+                            index: "urls",
+                            body: body,
+                        });
+                        const finalResults = result.body.aggregations["2"].buckets;
+                        console.log(finalResults);
+                        //const sentimentResults = result.body.aggregations["averageSentimentScore"].buckets;
+                        await redisClient.set(redisKey, JSON.stringify(finalResults), "EX", 60 * 60 * 24 * 30 * 2240);
+                        response.send(finalResults);
+                        //console.log(result);
+                    }
+                    catch (ex) {
+                        console.error(ex);
+                        response.sendStatus(500);
+                    }
+                }
+            });
+        };
         this.getTopicTrends = async (request, response) => {
             const redisKey = `Trends_${request.query.topicName}_${request.query.subTopicName1}_${request.query.subTopicName2}_${request.query.subTopicName3}_V9`;
             redisClient.get(redisKey).then(async (results) => {
@@ -302,6 +396,7 @@ class TrendsController {
         this.router.get(this.path + "/getTopicTrends", this.getTopicTrends);
         this.router.get(this.path + "/getTopicQuotes", this.getTopicQuotes);
         this.router.get(this.path + "/getTopicDomains", this.getTopicDomains);
+        this.router.get(this.path + "/getTopicTrendsOverAll", this.getTopicTrendsOverAll);
         //    this.router.post(this.path, this.createAPost);
     }
     setEsClient(esClient) {

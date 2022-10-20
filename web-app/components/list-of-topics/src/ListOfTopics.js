@@ -90,7 +90,7 @@ export class ListOfTopics extends BaseElement {
         <div class="mdc-card__primary-action">
           <div class="mdc-card__media mdc-card__media--16-9 my-media"></div>
           <div class="content">
-            <h2 class="mdc-typography--title contentTitle">Introduction to the popAI Dashboard</h2>
+            <h2 class="mdc-typography--title contentTitle">Introduction to the PopAI Dashboard</h2>
             <div class="mdc-typography--body1 subtext contentText">
               <p>
                 The present dashboard is part of the Horizon 2020 funded project PopAI. It is a
@@ -109,7 +109,7 @@ export class ListOfTopics extends BaseElement {
               </p>
               <p>
                 The popAI Dashboard is a part of the EU funded
-                <a href="https://www.pop-ai.eu/" target="_blank">pop AI</a> project.
+                <a href="https://www.pop-ai.eu/" target="_blank">PopAI</a> project.
               </p>
             </div>
           </div>
