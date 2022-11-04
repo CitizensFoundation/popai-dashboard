@@ -108,7 +108,7 @@ export class ListOfTopics extends BaseElement {
                 whether the overall discussion is positive, negative or neutral for each period.
               </p>
               <p>
-                The popAI Dashboard is a part of the EU funded popAI project,
+                The popAI Dashboard is a part of the EU funded
                 <a href="https://www.pop-ai.eu/" target="_blank">popAI</a> project, funded popAI project,
                 funded by the Horizon 2020 Framework Programme of the European Union for Research and
                 Innovation, GA number: 101022001.
