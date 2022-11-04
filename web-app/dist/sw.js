@@ -26,12 +26,12 @@ self.addEventListener('message', (event) => {
  */
 self.__precacheManifest = [
   {
-    "url": "dashboard-app-ec702688.js",
-    "revision": "18dc4e7429546a2bc0f0660e84adbbe2"
+    "url": "dashboard-app-e48df9f9.js",
+    "revision": "cb1c0da8317ae8bad86b8cf0505b0f77"
   },
   {
     "url": "index.html",
-    "revision": "0ca73a5546116400f614cc68c8b04378"
+    "revision": "134222601caca5621e2591c965eea85b"
   },
   {
     "url": "polyfills/custom-elements-es5-adapter.84b300ee818dce8b351c7cc7c100bcf7.js",
